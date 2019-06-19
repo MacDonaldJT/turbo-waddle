@@ -1,0 +1,32 @@
+def  getMovieTitles(substr):
+    
+    myList = []
+    newList = []
+    
+    myString = "https://jsonmock.hackerrank.com/api/movies/search/?Title="
+    
+    
+    response = urlopen(myString + substr + "&page=1").read().decode('utf8')
+    obj = json.loads(response)
+    
+    text = json.dumps(obj, indent=4)
+    
+    for p in obj['data']:
+        myList.append(p["Title"])
+        
+    response2 = urlopen(myString + substr + "&page=2").read().decode('utf8')
+    obj2 = json.loads(response2)
+    
+    text2 = json.dumps(obj2, indent = 4)
+    
+    for p in obj2['data']:
+        myList.append(p["Title"])
+    
+    myList.sort()
+    
+    return(myList)
+    
+  
+    
+    
+        
